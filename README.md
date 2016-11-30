@@ -1,7 +1,7 @@
 docker-transmission
 ===================
 
-A container dedicated to serve transmission 
+A container dedicated to serve transmission
 
 
 ## Preparation
@@ -28,4 +28,21 @@ Example of output:
     |     Passwd: rmtjubaG
     | http://<your_server>:9091/
 
+```
+
+
+Example with Docker Compose:
+
+```
+torrent:
+  image: stevenmartins/docker-transmission:latest
+  environment:
+    TRANSMISSION_PASS: "password"
+    TRANSMISSION_USER: "zidane"
+  volumes:
+    - ./data:/transmission/downloads
+  ports:
+    - "60000:9091"
+    - "51413:51413/udp"
+    - "51413:51413"
 ```
