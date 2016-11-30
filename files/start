@@ -11,13 +11,15 @@ ls -la $CONFIG_DIR
 
 if [[ ! -f ${SETTINGS}.bak ]]; then
     if [ -z $TRANSMISSION_PASS ]; then
-        echo Please provide a password for the 'transmission' user via the ADMIN_PASS enviroment variable.
+        echo Please provide a password for the user via the TRANSMISSION_PASS enviroment variable.
         exit 1
     fi
 
-    sed -i.bak -e "s/#TRANSMISSION_PASS#/$TRANSMISSION_PASS/" $SETTINGS 
+    sed -i.bak -e "s/#TRANSMISSION_PASS#/$TRANSMISSION_PASS/" $SETTINGS
+    sed -i.bak -e "s/#TRANSMISSION_USER#/$TRANSMISSION_USER/" $SETTINGS
 fi
 
 unset TRANSMISION_PASS
+unset TRANSMISSION_USER
 
-exec $TRANSMISSION -f --no-portmap --config-dir $CONFIG_DIR --log-info 
+exec $TRANSMISSION -f --no-portmap --config-dir $CONFIG_DIR --log-info
